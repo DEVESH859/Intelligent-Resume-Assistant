@@ -9,7 +9,7 @@ from prompts import EXTRACTION_PROMPT
 _client: Groq | None = None
 
 # Best Groq model for structured extraction (supports JSON mode)
-GROQ_MODEL = "llama-3.1-8b-instant"
+GROQ_MODEL = "llama-3.3-70b-versatile"
 
 
 def get_client() -> Groq:

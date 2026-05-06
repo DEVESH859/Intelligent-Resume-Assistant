@@ -9,7 +9,7 @@ from tools.skill_matcher import match_skill, extract_skill_from_query
 _client: Groq | None = None
 
 # Use a fast, capable model that supports JSON mode
-GROQ_MODEL = "llama-3.1-8b-instant"
+GROQ_MODEL = "llama-3.3-70b-versatile"
 
 
 def get_client() -> Groq:
