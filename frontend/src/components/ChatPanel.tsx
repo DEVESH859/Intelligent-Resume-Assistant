@@ -286,7 +286,7 @@ export default function ChatPanel({ sessionId, hasResume, onLoadingChange }: Cha
           </button>
         </div>
         <div className="chat-input-hint">
-          Grounded strictly in resume content · Powered by Groq (Llama 3.1 8B)
+          Grounded strictly in resume content · Powered by Groq (Llama 3.3 70B)
         </div>
       </div>
     </div>

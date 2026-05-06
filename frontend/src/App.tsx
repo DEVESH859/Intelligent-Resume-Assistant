@@ -45,7 +45,7 @@ function App() {
         </div>
         <div className="header-badge">
           <span className="header-badge-dot" />
-          Groq · Llama 3.1 8B · Skill Matcher
+          Groq · Llama 3.3 70B · Skill Matcher
         </div>
       </header>
 
