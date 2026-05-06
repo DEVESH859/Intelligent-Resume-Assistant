@@ -2,6 +2,7 @@
 
 ![Intelligent Resume Assistant](https://img.shields.io/badge/Status-Live-success) ![License](https://img.shields.io/badge/License-MIT-blue) ![Version](https://img.shields.io/badge/Version-1.0.0-purple)
 
+![App Interface](assets/hero.png)
 The **Intelligent Resume Assistant** is a production-ready, agentic AI application designed for recruiters, hiring managers, and HR professionals. It allows users to upload a candidate's resume (PDF or text) and instantly interact with a highly-focused, **hallucination-free** AI agent to query the candidate's skills, experience, and qualifications.
 
 ---
