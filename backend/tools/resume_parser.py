@@ -23,22 +23,8 @@ def get_client() -> Groq:
 
 
 def extract_text_from_pdf(file_bytes: bytes) -> str:
-    """Extract raw text from PDF bytes using pdfplumber, fallback to PyPDF2."""
+    """Extract raw text from PDF bytes using PyPDF2."""
     text = ""
-
-    # Primary: pdfplumber
-    try:
-        with pdfplumber.open(BytesIO(file_bytes)) as pdf:
-            for page in pdf.pages:
-                page_text = page.extract_text()
-                if page_text:
-                    text += page_text + "\n"
-        if text.strip():
-            return text
-    except Exception:
-        pass
-
-    # Fallback: PyPDF2
     try:
         reader = PyPDF2.PdfReader(BytesIO(file_bytes))
         for page in reader.pages:
