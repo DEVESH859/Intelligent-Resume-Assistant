@@ -7,6 +7,13 @@ The **Intelligent Resume Assistant** is a production-ready, agentic AI applicati
 
 ---
 
+## 🔗 Live Demo
+The application is fully hosted and accessible online:
+- **Frontend App (Vercel):** [https://intelligent-resume-assistant.vercel.app](https://intelligent-resume-assistant.vercel.app)
+- **Backend API (Render):** [https://intelligent-resume-assistant.onrender.com/docs](https://intelligent-resume-assistant.onrender.com/docs)
+
+---
+
 ## 🌟 Why We Built This
 
 Traditional LLMs (like standard ChatGPT) suffer from a major flaw when reviewing resumes: **Hallucination**. If you ask standard AI if a candidate knows a specific skill, the AI will often guess, assume, or hallucinate based on the candidate's general job title. 
@@ -151,8 +158,20 @@ start.bat
 
 ---
 
-## ☁️ Deployment Log & Decisions
+## ⚖️ Design Decisions and Trade-offs
 
-- **Why PyPDF2 instead of pdfplumber?** Initially, the app used `pdfplumber` for advanced extraction. However, `pdfplumber` frequently exceeded the 512MB RAM limit on Render's free tier, causing the server to silently crash and throw 502/Network Errors. Switching to `PyPDF2` resolved all memory-related deployment crashes.
-- **CORS & Axios Fix:** Explicit `Content-Type` headers were removed from Axios file uploads to allow the browser to auto-generate multipart boundaries, preventing mysterious connection drops in production.
-- **Vercel Env Vars:** The frontend falls back to the hardcoded Render URL to ensure robust production connectivity even if Vercel build environment variables fail to inject properly.
+- **Memory Efficiency vs. OCR Capabilities (PyPDF2 vs pdfplumber):**  
+  *Decision:* Switched from `pdfplumber` to `PyPDF2` for PDF parsing.  
+  *Trade-off:* While `pdfplumber` offers superior visual extraction and OCR for image-based PDFs, it caused severe memory spikes that crashed the Render free-tier instance (512MB RAM limit). `PyPDF2` is incredibly lightweight and stable, but trades off the ability to parse complex multi-column visual formats or scanned images.
+
+- **Deterministic Logic vs. Conversational Flow (Skill Matching):**  
+  *Decision:* Implemented an intent-detection interceptor for direct skill queries ("Does he know Python?").  
+  *Trade-off:* By bypassing the LLM and using a deterministic fuzzy-matcher for boolean skill checks, we completely eliminated hallucination risk for technical screening. However, this trades off the natural conversational fluidity that an LLM would normally provide for those specific queries.
+
+- **Cost Optimization vs. Edge-Case Latency (Llama 3.3 70B via Groq):**  
+  *Decision:* Utilized Groq's LPU architecture hosting `llama-3.3-70b-versatile` over OpenAI's GPT-4o.  
+  *Trade-off:* Groq provides ultra-low latency inference which makes the chat feel instantaneous and completely free to operate. The trade-off is stricter rate limits on the free tier, which could require batching or queueing if the application scales to hundreds of concurrent users.
+
+- **Axios Configuration & CORS:**  
+  *Decision:* Removed explicit `Content-Type: multipart/form-data` headers in the frontend Axios client.  
+  *Trade-off:* Manually defining the header stripped the crucial browser-generated boundary string, causing the backend to reject file uploads. Relying on the browser to auto-set the header ensures stability across environments but slightly reduces explicit type safety in the API client code.
