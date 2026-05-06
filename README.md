@@ -20,20 +20,42 @@ We built the Intelligent Resume Assistant to solve this problem by implementing 
 
 ---
 
+## 🚀 Key Features
+
+1. **Intelligent PDF Parsing**  
+   Automatically extracts raw text from complex PDF layouts using the lightweight `PyPDF2` library (to prevent cloud memory limits). The text is then processed by a `temperature=0.0` LLM call to perfectly structure it into strict JSON (Name, Email, Skills, Experience, etc.) without any hallucination.
+
+2. **Deep Narrative Integrity Audits**  
+   The AI proactively acts as a detective. It scans the candidate's career history for timeline contradictions, unexplained gaps exceeding 6 months, and inconsistent seniority (e.g., claiming to be a CEO with only 1 year of experience). It automatically flags these red flags in its responses.
+
+3. **Self-Auditing Bias Scoring**  
+   To ensure fair hiring practices, every LLM response evaluates its own reasoning for potential biases regarding protected characteristics (gender, age, ethnicity). It assigns itself a confidence penalty if biased language or assumptions are detected, ensuring objective evaluations.
+
+4. **Context-Aware Chat Agent**  
+   Users can ask dynamic, conversational questions (e.g., "Is this candidate suitable for a Senior Backend role?"). The AI evaluates the structured resume data and answers with citations, dynamic confidence scores, and `[Hidden Insights]` that infer soft skills or domain exposure from the text.
+
+5. **Deterministic Intent Detection System**  
+   The backend intercepts all chat messages to detect the user's intent. If the user asks a binary skill question ("Does he know Python?"), the system completely bypasses the LLM and routes the request to a deterministic heuristic regex and fuzzy-matcher to guarantee 100% absolute accuracy and prevent LLM hallucination on boolean logic.
+
+6. **Cloud-Optimized Architecture**  
+   Designed to run seamlessly within free-tier cloud constraints. Handles cold-starts gracefully and uses highly-optimized Python dependencies to respect tight 512MB RAM limits on platforms like Render.
+
+---
+
 ## 📸 Screenshots & Capabilities
 
 Our chat agent dynamically supports various types of analysis:
 
-**Deep Career Evaluation & Bias Scoring**
+**Deep Career Evaluation & Bias Scoring**  
 ![Career Evaluation](assets/demo4.png)
 
-**Narrative Integrity Audits**
+**Narrative Integrity Audits**  
 ![Narrative Integrity](assets/demo2.png)
 
-**Project Extraction & Hidden Insights**
+**Project Extraction & Hidden Insights**  
 ![Hidden Insights](assets/demo3.png)
 
-**Instant Deterministic Skill Matching**
+**Instant Deterministic Skill Matching**  
 ![Skill Matcher](assets/demo1.png)
 
 ---
@@ -51,17 +73,6 @@ Our chat agent dynamically supports various types of analysis:
 - **Groq API:** Powering the core LLM intelligence.
 - **Llama 3.3 70B Versatile:** The specific LLM model chosen for its immense reasoning capabilities and strict adherence to JSON output schemas.
 - **PyPDF2:** A lightweight, memory-efficient PDF parser specifically chosen to prevent Out-Of-Memory (OOM) crashes on cloud deployment environments.
-
----
-
-## 🚀 Key Features
-
-1. **Intelligent PDF Parsing:** Automatically extracts raw text from complex PDF layouts using PyPDF2 and uses a `temperature=0.0` LLM call to perfectly structure it into strict JSON.
-2. **Deep Narrative Integrity Audits:** The AI proactively scans the resume for timeline contradictions, unexplained gaps, and inconsistent seniority, automatically flagging red flags.
-3. **Self-Auditing Bias Scoring:** Every LLM response evaluates its own reasoning for potential biases regarding protected characteristics, assigning a confidence penalty if biased language is detected.
-4. **Context-Aware Chat Agent:** Users can ask dynamic questions (e.g., "Is this candidate suitable for a Senior Backend role?"). The AI evaluates the structured resume data and answers with citations, confidence scores, and hidden insights.
-5. **Intent Detection System:** The backend intercepts chat messages and detects the user's intent. If the user asks a binary skill question ("Does he know Python?"), it routes the request to a deterministic Python fuzzy-matcher rather than the LLM to guarantee absolute accuracy.
-6. **Cloud-Optimized Architecture:** Designed to run seamlessly within free-tier cloud constraints. Handles cold-starts gracefully and uses highly-optimized Python dependencies to respect tight memory limits (512MB RAM).
 
 ---
 
