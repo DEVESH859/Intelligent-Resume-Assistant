@@ -62,9 +62,7 @@ export async function uploadResume(
   formData.append("file", file);
   if (sessionId) formData.append("session_id", sessionId);
 
-  const res = await api.post<UploadResult>("/upload", formData, {
-    headers: { "Content-Type": "multipart/form-data" },
-  });
+  const res = await api.post<UploadResult>("/upload", formData);
   return res.data;
 }
 
@@ -76,9 +74,7 @@ export async function uploadResumeText(
   formData.append("text", text);
   if (sessionId) formData.append("session_id", sessionId);
 
-  const res = await api.post<UploadResult>("/upload", formData, {
-    headers: { "Content-Type": "multipart/form-data" },
-  });
+  const res = await api.post<UploadResult>("/upload", formData);
   return res.data;
 }
 
