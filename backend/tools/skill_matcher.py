@@ -84,6 +84,7 @@ def extract_skill_from_query(message: str) -> str:
     """Heuristically extract the skill name from a user query."""
     patterns = [
         r"(?:does? (?:the )?candidate have|has (?:the )?candidate|check(?:ing)? for?|is (?:the )?candidate (?:skilled|experienced|proficient) in|can (?:the )?candidate|does? (?:the )?resume (?:show|mention|have|list|include)|(?:has|have|knows?|knows?) (?:the )?candidate)\s+([a-z0-9\s\+\#\.]+?)(?:\s*(?:skill|experience|knowledge|proficiency|expertise))?[?.]?$",
+        r"(?:does? )?(?:he|she|they|candidate) (?:know|have knowledge|know about) ([a-z0-9\s\+\#\.]+)",
         r"skill[:\s]+([a-z0-9\s\+\#\.]+)",
         r"([a-z0-9\s\+\#\.]+)\s+skill",
     ]
