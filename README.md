@@ -19,6 +19,24 @@ We built the Intelligent Resume Assistant to solve this problem by implementing 
 
 ---
 
+## 📸 Screenshots & Capabilities
+
+Our chat agent dynamically supports various types of analysis:
+
+**Deep Career Evaluation & Bias Scoring**
+![Career Evaluation](assets/demo4.png)
+
+**Narrative Integrity Audits**
+![Narrative Integrity](assets/demo2.png)
+
+**Project Extraction & Hidden Insights**
+![Hidden Insights](assets/demo3.png)
+
+**Instant Deterministic Skill Matching**
+![Skill Matcher](assets/demo1.png)
+
+---
+
 ## 🛠️ Technology Stack
 
 ### **Frontend (Vercel)**
