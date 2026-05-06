@@ -56,10 +56,34 @@ Our chat agent dynamically supports various types of analysis:
 
 ## 🚀 Key Features
 
-1. **Intelligent PDF Parsing:** Automatically extracts raw text from complex PDF layouts and uses a `temperature=0.0` LLM call to structure it into strict JSON (Name, Email, Skills, Experience, etc.).
-2. **Context-Aware Chat Agent:** Users can ask dynamic questions (e.g., "Is this candidate suitable for a Senior Backend role?"). The AI evaluates the structured resume data and answers with citations and a confidence score.
-3. **Intent Detection System:** The backend intercepts chat messages and detects the user's intent. If the user asks a binary skill question ("Does he know Python?"), it routes the request to a deterministic Python fuzzy-matcher rather than the LLM to guarantee absolute accuracy.
-4. **Cloud-Optimized Architecture:** Designed to run seamlessly within free-tier cloud constraints. Handles cold-starts gracefully and uses highly-optimized Python dependencies to respect tight memory limits (512MB RAM).
+1. **Intelligent PDF Parsing:** Automatically extracts raw text from complex PDF layouts using PyPDF2 and uses a `temperature=0.0` LLM call to perfectly structure it into strict JSON.
+2. **Deep Narrative Integrity Audits:** The AI proactively scans the resume for timeline contradictions, unexplained gaps, and inconsistent seniority, automatically flagging red flags.
+3. **Self-Auditing Bias Scoring:** Every LLM response evaluates its own reasoning for potential biases regarding protected characteristics, assigning a confidence penalty if biased language is detected.
+4. **Context-Aware Chat Agent:** Users can ask dynamic questions (e.g., "Is this candidate suitable for a Senior Backend role?"). The AI evaluates the structured resume data and answers with citations, confidence scores, and hidden insights.
+5. **Intent Detection System:** The backend intercepts chat messages and detects the user's intent. If the user asks a binary skill question ("Does he know Python?"), it routes the request to a deterministic Python fuzzy-matcher rather than the LLM to guarantee absolute accuracy.
+6. **Cloud-Optimized Architecture:** Designed to run seamlessly within free-tier cloud constraints. Handles cold-starts gracefully and uses highly-optimized Python dependencies to respect tight memory limits (512MB RAM).
+
+---
+
+## 📁 Project Structure
+
+### Backend (FastAPI / Python)
+- `backend/main.py`: The FastAPI application entry point, CORS configuration, and routing logic.
+- `backend/agent.py`: The core LLM orchestration, intent detection, and Groq API communication logic.
+- `backend/prompts.py`: Strict system prompts enforcing structured JSON output, Narrative Integrity, and Bias Scoring.
+- `backend/models.py`: Pydantic data models for type-safe API requests and responses.
+- `backend/memory.py`: In-memory session management to track conversation history per user.
+- `backend/tools/resume_parser.py`: Extracts raw text from uploaded PDFs and structures it via LLM.
+- `backend/tools/skill_matcher.py`: Deterministic heuristic regex and fuzzy-matching logic for direct skill queries.
+
+### Frontend (React / TypeScript / Vite)
+- `frontend/src/App.tsx`: Main application layout and global state management.
+- `frontend/src/index.css`: Custom vanilla CSS design system featuring glassmorphism and micro-animations.
+- `frontend/src/api/client.ts`: Axios client configuration for robust backend communication.
+- `frontend/src/components/UploadPanel.tsx`: Interactive drag-and-drop resume upload zone.
+- `frontend/src/components/ChatPanel.tsx`: Main conversational interface displaying AI reasoning and insights.
+- `frontend/src/components/MessageBubble.tsx`: Renders individual chat messages, confidence scores, and missing data tags.
+- `frontend/src/components/ConfidenceBadge.tsx`: Visual indicators for AI confidence levels and data sources.
 
 ---
 
