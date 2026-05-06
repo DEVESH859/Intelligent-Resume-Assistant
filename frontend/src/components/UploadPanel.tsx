@@ -64,11 +64,13 @@ export default function UploadPanel({ onUploaded, onReset, resume }: UploadPanel
           setPdfUrl(null);
         }
         onUploaded(result.session_id, result.resume as ResumeData);
-      } catch (e: unknown) {
+      } catch (e: any) {
+        console.error(e);
         const msg =
-          (e as { response?: { data?: { detail?: string } } })?.response?.data
-            ?.detail || "Failed to parse resume. Please try again.";
-        setError(msg);
+          e?.response?.data?.detail || 
+          e?.message || 
+          "Failed to parse resume. Please try again.";
+        setError(`Error: ${msg}`);
       } finally {
         setIsLoading(false);
       }
@@ -101,11 +103,13 @@ export default function UploadPanel({ onUploaded, onReset, resume }: UploadPanel
       onUploaded(result.session_id, result.resume as ResumeData);
       setPasteText("");
       setPdfUrl(null);
-    } catch (e: unknown) {
+    } catch (e: any) {
+      console.error(e);
       const msg =
-        (e as { response?: { data?: { detail?: string } } })?.response?.data
-          ?.detail || "Failed to parse resume text.";
-      setError(msg);
+        e?.response?.data?.detail || 
+        e?.message || 
+        "Failed to parse resume text.";
+      setError(`Error: ${msg}`);
     } finally {
       setIsLoading(false);
     }
